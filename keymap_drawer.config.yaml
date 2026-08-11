@@ -1,0 +1,24 @@
+# Settings for scripts/draw-keymap.sh.
+#
+# Whole maps such as zmk_keycode_map are not overridden here: doing so drops
+# keymap-drawer's own defaults for every other key.
+parse_config:
+  raw_binding_map:
+    "&mkp LCLK": {t: Click, s: L}
+    "&mkp RCLK": {t: Click, s: R}
+    "&mkp MCLK": {t: Click, s: M}
+
+    "&kp LANG2": Eisu
+    "&kp LANG1": Kana
+
+  # Left unset the combos are drawn on every layer, since a ZMK combo with no
+  # `layers` property is active everywhere. Drawing hint only — it does not
+  # restrict the combos themselves.
+  zmk_combos:
+    combo_eisu: {layers: [BASE]}
+    combo_kana: {layers: [BASE]}
+
+draw_config:
+  draw_key_sides: true
+  # Not a fixed theme, so the picture stays legible in GitHub's dark mode too.
+  dark_mode: auto
