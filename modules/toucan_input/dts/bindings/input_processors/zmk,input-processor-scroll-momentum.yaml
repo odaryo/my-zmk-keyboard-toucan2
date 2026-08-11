@@ -1,0 +1,107 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: |
+  スクロール(ホイール)イベントに「2段階の速度」と「慣性(inertia)」を与える
+  入力プロセッサ。
+
+  - ゆっくりスワイプ: 何もしない(現在の速度そのまま)
+  - 速くスワイプ: fast-gain 倍に加速し、指を離した後も減速しながら
+    しばらくスクロールを続ける(慣性スクロール)
+
+  慣性中のイベントはこのノード自身をデバイスとする専用の zmk,input-listener
+  から送出されるため、トラックパッドのプロセッサチェーンを再通過しない。
+  したがってこのプロセッサはチェーンの最後(スケーラや transform の後)に
+  置くこと。
+
+  例:
+    scroll_momentum: scroll_momentum {
+        compatible = "zmk,input-processor-scroll-momentum";
+        #input-processor-cells = <0>;
+        codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
+        track-remainders;
+    };
+
+    scroll_momentum_listener: scroll_momentum_listener {
+        compatible = "zmk,input-listener";
+        device = <&scroll_momentum>;
+    };
+
+compatible: "zmk,input-processor-scroll-momentum"
+
+include: ip_zero_param.yaml
+
+properties:
+  codes:
+    type: array
+    required: true
+    description: |
+      対象の相対イベントコード(最大4個)。通常は
+      <INPUT_REL_WHEEL INPUT_REL_HWHEEL>。
+
+  fast-threshold:
+    type: int
+    default: 40
+    description: |
+      「速いスワイプ」と判定する速度のしきい値。単位は最終的なスクロール
+      単位/秒(スケーラ適用後の値)。この値以上で fast-gain と慣性が有効になる。
+      慣性が発動しない場合は下げ、通常スクロールで発動してしまう場合は上げる。
+
+  fast-gain:
+    type: int
+    default: 1200
+    description: |
+      速いスワイプ「中」の速度倍率(パーミル)。1200 = 1.2倍。
+      1000 にすると加速なし(慣性だけ)になる。
+
+  coast-gain:
+    type: int
+    default: 1000
+    description: |
+      慣性の「開始速度」の倍率(パーミル)。指を離した瞬間の実測速度に対する倍率。
+      1000 = 離した瞬間の速度のまま慣性に入る。慣性を弱めたいときはここを下げる。
+
+  max-coast-speed:
+    type: int
+    default: 120
+    description: |
+      慣性の開始速度の上限(スクロール単位/秒)。非常に速いフリックで慣性が
+      行き過ぎるのを防ぐ。慣性の移動量は概ね
+      (開始速度 × tick-ms ÷ 1000) ÷ (1 - decay/1000) 単位。
+
+  decay:
+    type: int
+    default: 850
+    description: |
+      慣性スクロールの1ティックあたりの速度残存率(パーミル)。
+      850 なら1ティックごとに 85% に減速する。小さいほど早く止まる。
+
+  tick-ms:
+    type: int
+    default: 25
+    description: 慣性スクロール中にイベントを送出する間隔(ms)。
+
+  release-ms:
+    type: int
+    default: 60
+    description: |
+      スクロールイベントが途切れてから「指が離れた」と判断するまでの時間(ms)。
+      短すぎるとスワイプ中に慣性が発動し、長すぎると慣性の開始が遅れる。
+
+  window-ms:
+    type: int
+    default: 120
+    description: 速度を測定する移動平均ウィンドウ(ms)。
+
+  max-duration-ms:
+    type: int
+    default: 1000
+    description: 慣性スクロールを継続する最大時間(ms)。
+
+  stop-on-move:
+    type: boolean
+    description: |
+      カーソル移動(INPUT_REL_X / INPUT_REL_Y)を検知したときも慣性を止める。
+      指を置いたら即止まる実機トラックパッドに近い挙動になるが、ドライバが
+      スクロール中に X/Y も同時に出す場合は慣性が発動しなくなるため、その
+      場合は無効にする。

@@ -1,0 +1,82 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: |
+  相対イベント(2本指スクロール)の移動量を軸ごとに積算し、しきい値を超えたら
+  その軸の方向に応じた behavior を実行する入力プロセッサ。
+
+  2本指スワイプを macOS のワークスペース切り替えや Mission Control などの
+  ショートカットに割り当てる用途を想定している。発火は1ジェスチャにつき1回
+  (throttle-ms = 0 の場合)で、ロックは軸をまたいで共有されるため、斜めの
+  スワイプで縦横のショートカットが同時に出ることはない。
+
+  対象イベントは既定で消費される(値が0になり、後続のプロセッサも走らない)ため
+  同じスワイプが横スクロールとしても流れることはない。1本指スクロールに影響を
+  与えないよう、zip_xy_to_scroll_mapper より「前」に置くこと(X/Y がホイールに
+  変換される前ならトラックパッドの2本指スクロールだけが HWHEEL になる)。
+
+  例:
+    nav_swipe_mapper: nav_swipe_mapper {
+        compatible = "zmk,input-processor-swipe-keys";
+        #input-processor-cells = <0>;
+        codes = <INPUT_REL_HWHEEL INPUT_REL_WHEEL>;
+        threshold = <15>;
+        bindings = <&kp LG(LS(LEFT))>, <&kp LG(LS(RIGHT))>,
+                   <&kp LG(UP)>, <&kp LG(DOWN)>;
+    };
+
+compatible: "zmk,input-processor-swipe-keys"
+
+include: ip_zero_param.yaml
+
+properties:
+  codes:
+    type: array
+    required: true
+    description: |
+      対象の相対イベントコード(最大4個)。2本指スワイプなら
+      <INPUT_REL_HWHEEL INPUT_REL_WHEEL>(横, 縦)。
+
+  threshold:
+    type: int
+    required: true
+    description: |
+      behavior を発火させるまでの積算移動量(ドライバが出す生の値の合計)。
+      TPS43 トラックパッドの2本指スクロールでは1スワイプの合計が数十単位
+      なので 15 前後が目安。大きくすると「もっと大きくスワイプしないと
+      反応しない」。反応しない場合は下げ、勝手に発火する場合は上げる。
+      CONFIG_ZMK_LOG_LEVEL_DBG=y でビルドすると毎イベントの積算値がログに出る。
+
+      積算中にピークから threshold の半分以上引き返すと「逆方向のスワイプ」と
+      みなして積算をやり直す。
+
+  bindings:
+    type: phandle-array
+    required: true
+    description: |
+      codes の各軸に対して behavior を2つずつ、codes と同じ順で指定する
+      (軸 i に対して bindings[2i] = 負方向、bindings[2i+1] = 正方向)。
+      方向が逆になる場合はその軸の2つを入れ替える。
+
+  timeout-ms:
+    type: int
+    default: 300
+    description: |
+      この時間だけ対象イベントが途切れたら「スワイプが終わった」とみなし、
+      積算値と連射ロックをリセットする。ドライバは1レポートで縦横どちらか
+      優勢な軸だけを出すため、横スワイプ中でも HWHEEL が数十ms途切れることが
+      ある。短すぎると積算がリセットされて発火しにくくなる。
+      指を離した時点(BTN_TOUCH release)でも必ずリセットされる。
+
+  throttle-ms:
+    type: int
+    default: 0
+    description: |
+      0 なら1回のスワイプで1回だけ発火する(指を離すまで再発火しない)。
+      正の値にすると、スワイプを続けたままこの間隔で連続発火できる。
+
+  pass-through:
+    type: boolean
+    description: |
+      対象イベントを消費せず、後続のプロセッサにもそのまま流す。
+      既定(無指定)ではイベントを消費する。

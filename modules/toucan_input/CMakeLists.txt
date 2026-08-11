@@ -1,0 +1,5 @@
+zephyr_library()
+# この include を省くと drivers/input_processor.h が見つからない(ZMK 本体の app/include にある)
+zephyr_library_include_directories(${APPLICATION_SOURCE_DIR}/include)
+zephyr_library_sources(src/input_processor_scroll_momentum.c)
+zephyr_library_sources(src/input_processor_swipe_keys.c)

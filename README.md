@@ -28,6 +28,28 @@ The picture is generated from `config/toucan.keymap`, so regenerate it after eve
 
 It uses [keymap-drawer](https://github.com/caksoylar/keymap-drawer) through `uvx`, with the label overrides in [keymap_drawer.config.yaml](keymap_drawer.config.yaml) and the physical layout read straight out of the shield's `default_layout`.
 
+# Trackpad gestures
+
+NAV is the only layer that changes the trackpad. Every other layer uses the base input-processor chain.
+
+| Gesture | Every layer but NAV | NAV |
+| --- | --- | --- |
+| One-finger drag | Move the cursor | Scroll (both axes inverted) |
+| Two-finger swipe, horizontal | Scroll horizontally | Switch workspaces (`⌃⇧←` / `⌃⇧→`) |
+| Two-finger swipe, vertical | Scroll vertically | Mission Control / App Exposé (`⌃↑` / `⌃↓`) |
+| Three-finger swipe, up / down / left / right | `⌃↑` / `⌃↓` / `⌃⇧←` / `⌃⇧→` | — |
+| Pinch | Zoom (`⌘-` / `⌘=`) | — |
+| Tap / two-finger tap / press and hold | Click / right click / hold, all from the driver | same |
+| Touching the pad at all | Holds the MOU layer, so the thumbs are left/right/middle click | — |
+
+Workspace switching is a personal setting, not a macOS default: this config sends `⌃⇧←` / `⌃⇧→`, which are what "Move left/right a space" are bound to in System Settings here.
+
+Every scrolling gesture goes through the two-stage speed and momentum: swipe gently and nothing changes, flick and the scroll keeps coasting until you touch the pad again.
+
+The gaps in the NAV column are not oversights: a layer override that matches replaces the base processor chain outright, and the NAV chain deliberately leaves out `zip_zoom_mapper`, `swipe_button_mapper` and `is_touching_processor`. Button events are untouched by any of this, so tapping still clicks on every layer.
+
+Every shortcut gesture assumes macOS. Define `TOUCAN_WIN_MODE` at the top of [boards/shields/toucan/toucan.dtsi](boards/shields/toucan/toucan.dtsi) to switch the zoom, two-finger and three-finger bindings to their Windows equivalents.
+
 # License
 
 The code in this repo is available under the MIT license.
