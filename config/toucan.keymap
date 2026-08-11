@@ -91,7 +91,7 @@
         mouse {
             display-name = "MOU";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MCLK  &mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp RCLK  &mkp MCLK
+&trans  &trans  &trans  &kp LG(LS(N4))  &kp LG(LC(LS(N4)))  &kp LG(LS(N5))  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MCLK  &mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp RCLK  &mkp MCLK
             >;
         };
     };

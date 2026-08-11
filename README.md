@@ -13,7 +13,7 @@ Four layers, all reached from the thumbs:
 | BASE | — | Letters, home row mods |
 | NAV | Hold left `Space` or right `Backspace` | Digits, brackets, arrows, `Home`/`End`/`PgUp`/`PgDn` |
 | FUN | Hold left `Esc` or right `Enter` | `F1`–`F12`, Bluetooth profiles on the left bottom row |
-| MOU | Automatic mouse layer — active while a finger rests on the trackpad | Thumbs become mouse buttons |
+| MOU | Automatic mouse layer — active while a finger rests on the trackpad | Thumbs become mouse buttons, `A`/`S`/`D`/`F` repeat the swipe shortcuts |
 
 Details that the picture cannot show:
 

@@ -8,6 +8,16 @@ parse_config:
     "&mkp RCLK": {t: Click, s: R}
     "&mkp MCLK": {t: Click, s: M}
 
+    "&kp LG(LS(N4))": {t: Area, s: SS}
+    "&kp LG(LC(LS(N4)))": {t: Area, s: Clip}
+    "&kp LG(LS(N5))": {t: Panel, s: SS}
+
+    # Spelled out as glyphs because the default labels overflow the key.
+    "&kp LC(LS(LEFT))": "⌃⇧←"
+    "&kp LC(LS(RIGHT))": "⌃⇧→"
+    "&kp LC(UP)": "⌃↑"
+    "&kp LC(DOWN)": "⌃↓"
+
     "&kp LANG2": Eisu
     "&kp LANG1": Kana
 
