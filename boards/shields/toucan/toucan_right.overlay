@@ -77,6 +77,10 @@
         switch-xy;
         invert-scroll-y;
 
+        // "always" にしないのは、分割の BLE トラフィックがほぼ倍になるため
+        // (座標の確認中だけ一時的に使う)。
+        report-absolute = "touchdown";
+
     };
 };
 

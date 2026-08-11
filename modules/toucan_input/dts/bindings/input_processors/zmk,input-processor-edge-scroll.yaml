@@ -1,0 +1,72 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: |
+  トラックパッドの端(既定では右端)に指を置いてなぞったときだけ、その動きを
+  カーソル移動ではなくスクロールに変換する入力プロセッサ(エッジスクロール)。
+
+  判定にはドライバが送る絶対座標を使うので、トラックパッド側で
+  report-absolute = "touchdown" を有効にしておくこと。
+
+  指を置いた瞬間の座標だけでエッジ帯の内外を判定してラッチする。途中で
+  エッジ帯から外れてもスクロールは続き、指を離した時点で解除される。
+
+  相対イベントのコードを差し替えるだけなので、後続に zip_scroll_scaler や
+  慣性スクロールを置けばそのまま効く。チェーンの「先頭」に置くこと。
+
+  例:
+    edge_scroll: edge_scroll {
+        compatible = "zmk,input-processor-edge-scroll";
+        #input-processor-cells = <0>;
+        position-code = <INPUT_ABS_X>;
+        move-code = <INPUT_REL_Y>;
+        scroll-code = <INPUT_REL_WHEEL>;
+        edge-min = <1700>;
+        edge-max = <65535>;
+    };
+
+compatible: "zmk,input-processor-edge-scroll"
+
+include: ip_zero_param.yaml
+
+properties:
+  position-code:
+    type: int
+    default: 0  # INPUT_ABS_X
+    description: |
+      エッジを跨ぐ方向(右端判定なら横方向)の絶対座標コード。
+      トラックパッドで switch-xy を有効にしていると、物理的な横方向が
+      INPUT_ABS_Y 側になることがある。実機で確認すること。
+
+  move-code:
+    type: int
+    default: 1  # INPUT_REL_Y
+    description: |
+      エッジに沿って指を動かす方向(右端なら縦方向)の相対イベントコード。
+      position-code と直交する軸を指定する。
+
+  scroll-code:
+    type: int
+    default: 8  # INPUT_REL_WHEEL
+    description: 出力するスクロールのコード。縦スクロールなら INPUT_REL_WHEEL。
+
+  edge-min:
+    type: int
+    required: true
+    description: |
+      エッジ帯の下限(position-code の生の絶対座標、この値を含む)。
+      座標は 0 〜 (解像度 - 1) の範囲。解像度はドライバが起動時に
+      "Active resolution: x=..., y=..." としてログに出力する。
+      右端の 15% を帯にするなら、解像度 2048 に対して 1740 程度。
+
+  edge-max:
+    type: int
+    required: true
+    description: |
+      エッジ帯の上限(この値を含む)。右端を帯にする場合は解像度より大きな値
+      (例: 65535)を入れておけば上限を気にしなくてよい。左端を帯にするなら
+      edge-min = <0> と小さめの edge-max を指定する。
+
+  invert:
+    type: boolean
+    description: スクロール方向を反転する。

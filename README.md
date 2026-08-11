@@ -35,12 +35,15 @@ NAV is the only layer that changes the trackpad. Every other layer uses the base
 | Gesture | Every layer but NAV | NAV |
 | --- | --- | --- |
 | One-finger drag | Move the cursor | Scroll (both axes inverted) |
+| One-finger drag inside the rightmost 4% | Scroll vertically (edge scrolling) | Scroll vertically |
 | Two-finger swipe, horizontal | Scroll horizontally | Switch workspaces (`⌃⇧←` / `⌃⇧→`) |
 | Two-finger swipe, vertical | Scroll vertically | Mission Control / App Exposé (`⌃↑` / `⌃↓`) |
 | Three-finger swipe, up / down / left / right | `⌃↑` / `⌃↓` / `⌃⇧←` / `⌃⇧→` | — |
 | Pinch | Zoom (`⌘-` / `⌘=`) | — |
 | Tap / two-finger tap / press and hold | Click / right click / hold, all from the driver | same |
 | Touching the pad at all | Holds the MOU layer, so the thumbs are left/right/middle click | — |
+
+The rightmost 4% of the pad is an edge-scroll strip: put a finger down there and drag up or down and it scrolls vertically instead of moving the cursor, on every layer. The strip is latched when the finger lands, so drifting out of it mid-drag keeps scrolling; starting outside it never scrolls.
 
 Workspace switching is a personal setting, not a macOS default: this config sends `⌃⇧←` / `⌃⇧→`, which are what "Move left/right a space" are bound to in System Settings here.
 

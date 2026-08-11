@@ -12,6 +12,8 @@ manifest:
       url-base: https://github.com/caksoylar
     - name: beekeeb
       url-base: https://github.com/beekeeb
+    - name: odaryo
+      url-base: https://github.com/odaryo
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -20,9 +22,12 @@ manifest:
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: 8756cb7b8114069fa3c25c6f6c990f24988fceff # tag v0.3
+    # 上流(beekeeb)をそのまま使わないのは、エッジスクロール用の report-absolute が
+    # 無いため。分岐元は beekeeb main = c329f30。デフォルトブランチの master には
+    # three-finger-swipe が入っていないので、そちらには戻さないこと。
     - name: zmk_driver_azoteq
-      remote: beekeeb
-      revision: c329f309b7481e5723603550b15f48e24d0c8a6a # main
+      remote: odaryo
+      revision: 57b4da9e70a1c0358020864f02f64e584ac415e8 # toucan-edge-scroll
     - name: zmk-input-zoom
       remote: beekeeb
       revision: 91bbe0c0e02145da50c9df798489479d28be1804 # main @ 2026-08-11

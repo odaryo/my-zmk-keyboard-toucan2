@@ -158,6 +158,18 @@
 #endif
         };
 
+        edge_scroll: edge_scroll {
+            compatible = "zmk,input-processor-edge-scroll";
+            #input-processor-cells = <0>;
+            position-code = <INPUT_ABS_X>;
+            move-code = <INPUT_REL_Y>;
+            scroll-code = <INPUT_REL_WHEEL>;
+            // 解像度 2048 を前提にした値にしないのは、実測レンジが約 0..1023 で、
+            // 2048 前提だと帯がレンジ外に出てしまうため。
+            edge-min = <980>;
+            edge-max = <65535>;
+        };
+
         // 割り当ては nav_swipe_mapper と揃える。片方だけ変えると2本指と3本指で
         // 挙動が食い違う。
         swipe_button_mapper: swipe_button_mapper {
@@ -187,10 +199,16 @@
         compatible = "zmk,input-listener";
         status = "disabled";
         device = <&trackpad_split>;
-        input-processors = <&zip_xy_scaler 100 100>, <&zip_scroll_scaler 1 40>, <&zip_zoom_mapper>, <&is_touching_processor>, <&swipe_button_mapper>, <&scroll_momentum>;
+        // edge_scroll を後ろに回さないこと。絶対座標を消費して REL_Y をホイールに
+        // 差し替えるので、他のプロセッサが先に生の値を見てしまう。
+        input-processors = <&edge_scroll>, <&zip_xy_scaler 100 100>, <&zip_scroll_scaler 1 40>, <&zip_zoom_mapper>, <&is_touching_processor>, <&swipe_button_mapper>, <&scroll_momentum>;
         nav_scroller {
             layers = <1>;
             input-processors = <
+                // edge_scroll をここで省略しないこと。override が一致するとベースの
+                // チェーンは走らず(process-next 未指定時)、「ベースで触り始めて NAV に
+                // 切り替えてから離す」操作でラッチが residual に残る。
+                &edge_scroll
                 &nav_swipe_mapper
                 &zip_xy_to_scroll_mapper
                 &zip_scroll_scaler 1 40
