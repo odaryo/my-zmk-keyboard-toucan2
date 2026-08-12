@@ -77,21 +77,21 @@
         nav {
             display-name = "NAV";
             bindings = <
-&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &hml LGUI LBKT  &hml LALT LBRC  &hml LCTRL RBRC  &hml LSHFT RBKT  &trans  &kp LEFT  &hmr LSHFT DOWN  &hmr LCTRL UP  &hmr LALT RIGHT  &hmr LGUI SEMI  &kp GRAVE  &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END  &kp FSLH  &kp BSLH  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &hml LGUI LBKT  &hml LALT LBRC  &hml LCTRL RBRC  &hml LSHFT RBKT  &trans  &kp LEFT  &hmr LSHFT DOWN  &hmr LCTRL UP  &hmr LALT RIGHT  &hmr LGUI SEMI  &kp GRAVE  &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END  &kp FSLH  &kp BSLH  &kp LCTRL  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
         fun {
             display-name = "FUN";
             bindings = <
-&trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F4  &kp F5  &kp F6  &kp SEMI  &kp GRAVE  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &kp F1  &kp F2  &kp F3  &kp FSLH  &kp BSLH  &trans  &trans  &trans  &trans  &kp RIGHT_ALT  &trans
+&trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F4  &kp F5  &kp F6  &kp SEMI  &kp GRAVE  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &kp F1  &kp F2  &kp F3  &kp FSLH  &kp BSLH  &kp LCTRL  &trans  &trans  &trans  &kp RIGHT_ALT  &trans
             >;
         };
 
         mouse {
             display-name = "MOU";
             bindings = <
-&trans  &trans  &trans  &kp LG(LS(N4))  &kp LG(LC(LS(N4)))  &kp LG(LS(N5))  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MCLK  &mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp RCLK  &mkp MCLK
+&trans  &trans  &trans  &kp LG(LS(N4))  &kp LG(LC(LS(N4)))  &kp LG(LS(N5))  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &mkp MCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LCTRL  &mkp LCLK  &mkp RCLK  &mkp LCLK  &mkp RCLK  &mkp MCLK
             >;
         };
     };
