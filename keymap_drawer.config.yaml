@@ -21,12 +21,9 @@ parse_config:
     "&kp LANG2": Eisu
     "&kp LANG1": Kana
 
-  # Left unset the combos are drawn on every layer, since a ZMK combo with no
-  # `layers` property is active everywhere. Drawing hint only — it does not
-  # restrict the combos themselves.
-  zmk_combos:
-    combo_eisu: {layers: [BASE]}
-    combo_kana: {layers: [BASE]}
+  # zmk_combos is left unset because every combo already declares its own
+  # `layers`: overriding them here would only let the picture drift from the
+  # keymap.
 
 draw_config:
   draw_key_sides: true

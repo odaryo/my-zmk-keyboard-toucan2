@@ -54,13 +54,44 @@
         combo_eisu {
             timeout-ms = <50>;
             key-positions = <4 16>;
+            layers = <BASE>;
             bindings = <&kp LANG2>;
         };
 
         combo_kana {
             timeout-ms = <50>;
             key-positions = <7 19>;
+            layers = <BASE>;
             bindings = <&kp LANG1>;
+        };
+
+        combo_tab {
+            timeout-ms = <50>;
+            key-positions = <3 15>;   // E + D
+            layers = <BASE>;
+            bindings = <&kp TAB>;
+        };
+
+        combo_minus {
+            timeout-ms = <50>;
+            key-positions = <8 20>;   // I + K
+            layers = <BASE>;
+            bindings = <&kp MINUS>;
+        };
+
+        combo_equal {
+            timeout-ms = <50>;
+            key-positions = <9 21>;   // O + L
+            layers = <BASE>;
+            bindings = <&kp EQUAL>;
+        };
+
+        combo_ralt {
+            timeout-ms = <50>;
+            key-positions = <39 40>;   // 右親指 RET + BSPC
+            // 他のレイヤでは親指のレイヤキー同士の同時押しになるので BASE 限定。
+            layers = <BASE>;
+            bindings = <&kp RALT>;
         };
     };
 
@@ -77,21 +108,21 @@
         nav {
             display-name = "NAV";
             bindings = <
-&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &hml LGUI LBKT  &hml LALT LBRC  &hml LCTRL RBRC  &hml LSHFT RBKT  &trans  &kp LEFT  &hmr LSHFT DOWN  &hmr LCTRL UP  &hmr LALT RIGHT  &hmr LGUI SEMI  &kp GRAVE  &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END  &kp FSLH  &kp BSLH  &kp LCTRL  &trans  &trans  &trans  &trans  &trans
+&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &hml LGUI LBKT  &hml LALT LBRC  &hml LCTRL RBRC  &hml LSHFT RBKT  &kp MINUS  &kp LEFT  &hmr LSHFT DOWN  &hmr LCTRL UP  &hmr LALT RIGHT  &hmr LGUI SEMI  &trans  &trans  &kp BSLH  &trans  &kp GRAVE  &kp SQT  &kp EQUAL  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
         fun {
             display-name = "FUN";
             bindings = <
-&trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F4  &kp F5  &kp F6  &kp SEMI  &kp GRAVE  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &kp F1  &kp F2  &kp F3  &kp FSLH  &kp BSLH  &kp LCTRL  &trans  &trans  &trans  &kp RIGHT_ALT  &trans
+&trans  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F4  &kp F5  &kp F6  &kp F12  &trans  &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR  &trans  &kp F1  &kp F2  &kp F3  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
         mouse {
             display-name = "MOU";
             bindings = <
-&trans  &trans  &trans  &kp LG(LS(N4))  &kp LG(LC(LS(N4)))  &kp LG(LS(N5))  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &mkp LCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MCLK  &mkp RCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &mkp MCLK
+&trans  &kp LG(LS(N4))  &kp LG(LS(N5))  &trans  &trans  &mkp MCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LG(LC(LS(N4)))  &trans  &trans  &trans  &mkp LCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &mkp RCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &mkp MCLK
             >;
         };
     };
