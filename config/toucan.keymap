@@ -122,7 +122,7 @@
         mouse {
             display-name = "MOU";
             bindings = <
-&trans  &kp LG(LS(N4))  &kp LG(LS(N5))  &trans  &trans  &mkp MCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LG(LC(LS(N4)))  &trans  &trans  &trans  &mkp LCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &mkp RCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &mkp MCLK
+&trans  &kp LG(LC(LS(N4)))  &kp LG(LS(N4))  &kp LG(LS(N5))  &trans  &mkp MCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &mkp LCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp RCLK  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &mkp MCLK
             >;
         };
     };
