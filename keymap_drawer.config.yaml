@@ -9,6 +9,7 @@ parse_config:
     "&mkp MCLK": {t: Click, s: M}
 
     "&kp LG(LS(N4))": {t: Area, s: SS}
+    "&mou_w": {t: Area, s: SS, h: "⌘ Close"}
     "&kp LG(LC(LS(N4)))": {t: Area, s: Clip}
     "&kp LG(LS(N5))": {t: Panel, s: SS}
 

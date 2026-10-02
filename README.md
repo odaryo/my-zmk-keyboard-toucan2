@@ -13,7 +13,7 @@ Four layers, all reached from the thumbs:
 | BASE | — | Letters, home row mods |
 | NAV | Hold left `Space` or right `Backspace` | Digits, brackets, arrows, `Home`/`End`/`PgUp`/`PgDn` |
 | FUN | Hold left `Esc` or right `Enter` | `F1`–`F12`, Bluetooth profiles on the left top row (`Tab` clears), workspace shortcuts on `A`/`S`/`D`/`F` |
-| MOU | Automatic mouse layer — active while a finger rests on the trackpad | Right thumbs and `T`/`F`/`G` become mouse buttons, `Q`/`W`/`E` take screenshots |
+| MOU | Automatic mouse layer — active while a finger rests on the trackpad | Right thumbs and `T`/`F`/`G` become mouse buttons, `Q`/`W`/`E` take screenshots (`⌘`+`W` still closes the window) |
 
 Details that the picture cannot show:
 
@@ -40,7 +40,7 @@ NAV is the only layer that changes the trackpad. Every other layer uses the base
 | Two-finger swipe, vertical | Scroll vertically | Mission Control / App Exposé (`⌃↑` / `⌃↓`) |
 | Three-finger swipe, up / down / left / right | `⌃↑` / `⌃↓` / `⌃⇧←` / `⌃⇧→` | — |
 | Pinch | Zoom (`⌘-` / `⌘=`) | — |
-| Tap / two-finger tap / press and hold | Click / right click / hold, all from the driver | same |
+| Tap / two-finger tap | Click / right click, both from the driver | same |
 | Touching the pad at all | Holds the MOU layer, so the right thumbs are left/right/middle click | — |
 
 The rightmost 4% of the pad is an edge-scroll strip: put a finger down there and drag up or down and it scrolls vertically instead of moving the cursor, on every layer. The strip is latched when the finger lands, so drifting out of it mid-drag keeps scrolling; starting outside it never scrolls.
