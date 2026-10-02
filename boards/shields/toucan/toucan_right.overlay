@@ -67,7 +67,6 @@
 
         filter-settings=<0x0B>;
 
-        zoom;
         scroll;
         two-finger-tap;
         single-tap;
