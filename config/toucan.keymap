@@ -47,10 +47,11 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // FUN キーは「FUN+キー」を素早くロール押ししてもタップ(ESC/RET)に化けないよう、
+        // レイヤキー(SPACE/ESC/RET)は「レイヤ+キー」を素早くロール押ししてもタップに化けないよう、
         // 押している間に他のキーが押された時点でホールドにする。
-        // quick-tap-ms を書かないのは、ESC/RET の直後でも FUN に入れるようにするため。
-        lt_fun: layer_tap_fun {
+        // quick-tap-ms / require-prior-idle-ms を書かないのは、直前の打鍵に関係なく長押しで必ずレイヤに入れるため。
+        // (require-prior-idle-ms は直前の任意のキーを見るので、BSPC 直後の SPACE 長押しがタップ+リピートになっていた)
+        lt_hp: layer_tap_hold_preferred {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "hold-preferred";
@@ -58,10 +59,10 @@
             bindings = <&mo>, <&kp>;
         };
 
-        // NAV キーも FUN と同じく、ロール押しでタップ(SPACE/BSPC)に化けないよう hold-preferred にする。
-        // quick-tap を残すのは、ダブルタップ+押しっぱなしで SPACE/BSPC を連続入力するため。
-        // require-prior-idle-ms は、打鍵中の SPACE が次の文字とのロールで NAV に化けるのを防ぐため。
-        lt_nav: layer_tap_nav {
+        // BSPC 用の NAV キー。ロール押しでタップに化けないよう hold-preferred にする。
+        // quick-tap を残すのは、ダブルタップ+押しっぱなしで BSPC を連続入力するため。
+        // require-prior-idle-ms は、打ち間違いの修正で「文字→BSPC」とロールしたときに NAV に化けるのを防ぐため。
+        lt_nav_bspc: layer_tap_nav_bspc {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "hold-preferred";
@@ -134,7 +135,7 @@
         base {
             display-name = "BASE";
             bindings = <
-&kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp MINUS  &kp LGUI  &hml LGUI A  &hml LALT S  &hml LCTRL D  &hml LSHFT F  &kp G  &kp H  &hmr LSHFT J  &hmr LCTRL K  &hmr LALT L  &hmr LGUI SEMI  &kp SQT  &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp EQUAL  &kp LCTRL  &lt_nav NAV SPACE  &lt_fun FUN ESC  &lt_fun FUN RET  &lt_nav NAV BSPC  &kp DEL
+&kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp MINUS  &kp LGUI  &hml LGUI A  &hml LALT S  &hml LCTRL D  &hml LSHFT F  &kp G  &kp H  &hmr LSHFT J  &hmr LCTRL K  &hmr LALT L  &hmr LGUI SEMI  &kp SQT  &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp EQUAL  &kp LCTRL  &lt_hp NAV SPACE  &lt_hp FUN ESC  &lt_hp FUN RET  &lt_nav_bspc NAV BSPC  &kp DEL
             >;
         };
 
