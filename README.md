@@ -12,7 +12,7 @@ Four layers, all reached from the thumbs:
 | --- | --- | --- |
 | BASE | — | Letters, home row mods |
 | NAV | Hold left `Space` or right `Backspace` | Digits, brackets, arrows, `Home`/`End`/`PgUp`/`PgDn` |
-| FUN | Hold left `Esc` or right `Enter` | `F1`–`F12`, Bluetooth profiles on the left top row (left `Shift` clears), workspace shortcuts on `A`/`S`/`D`/`F`, left click on `G` |
+| FUN | Hold left `Esc` or right `Enter` | `F1`–`F12`, Bluetooth profiles on the left top row (hold `Tab` for 2 s to clear), workspace shortcuts on `A`/`S`/`D`/`F`, left click on `G` |
 | MOU | Automatic mouse layer — active while a finger rests on the trackpad | Right thumbs and `T`/`G`/`B` become mouse buttons, `Q`/`W`/`E` take screenshots (`⌘`+`W` still closes the window) |
 
 Details that the picture cannot show:

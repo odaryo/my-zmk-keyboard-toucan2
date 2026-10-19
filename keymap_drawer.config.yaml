@@ -19,6 +19,8 @@ parse_config:
     "&kp LC(UP)": "⌃↑"
     "&kp LC(DOWN)": "⌃↓"
 
+    "&bt_clr_hold 0 0": {t: BT CLR, s: hold 2s}
+
     "&kp LANG2": Eisu
     "&kp LANG1": Kana
 

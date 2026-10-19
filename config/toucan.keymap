@@ -80,6 +80,23 @@
             bindings = <&kp LG(LS(N4))>, <&kp LG(W)>;
             mods = <(MOD_LGUI|MOD_RGUI)>;
         };
+
+        // hold-tap からは引数を1つしか渡せず、&bt BT_CLR(引数2つ)を直接置けないので包む。
+        bt_clr_m: bt_clr_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_CLR>;
+        };
+
+        // FUN のロール押しで BT_CLR が暴発しペアリングが消えていたので、2秒長押ししたときだけ発動させる。
+        // tap-preferred にするのは、押している間に他のキーを押しても長押し扱いにしないため。
+        bt_clr_hold: bt_clr_hold {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <2000>;
+            bindings = <&bt_clr_m>, <&none>;
+        };
     };
 
     combos {
@@ -149,7 +166,7 @@
         fun {
             display-name = "FUN";
             bindings = <
-&trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &mkp LCLK  &trans  &kp F4  &kp F5  &kp F6  &kp F12  &trans  &bt BT_CLR  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F2  &kp F3  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&bt_clr_hold 0 0  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans  &trans  &kp LC(LS(LEFT))  &kp LC(DOWN)  &kp LC(UP)  &kp LC(LS(RIGHT))  &mkp LCLK  &trans  &kp F4  &kp F5  &kp F6  &kp F12  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp F1  &kp F2  &kp F3  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
